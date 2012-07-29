@@ -22,20 +22,35 @@ int init()
 
 int main(int argc, char ** argv)
 {
+  int id, ticks;
+  
   if(init())
     return 1;
 
-  int ticks = 0;
+  ticks = 0;
+  id = 0;
+  
   while(!quit)
     {
       if(SDL_PollEvent(&event))
 	{
 	  if(event.type == SDL_QUIT)
 	    quit = 1;
+	  else if(event.type == SDL_KEYDOWN)
+	    {
+	      SDLKey key = event.key.keysym.sym;
+
+	      if(key == SDLK_RIGHT)
+		id++;
+	      else if(key == SDLK_LEFT)
+		id--;
+	      else if(key == SDLK_UP)
+		ticks = 0;
+	    }
 	}
       /*Update/drawing Loop*/
 
-      draw_pattern(screen, 0, ticks);
+      draw_pattern(screen, id, ticks);
       
       ticks++;
       
