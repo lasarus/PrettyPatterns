@@ -14,4 +14,5 @@ clean:
 	rm -f $(TARGET)
 
 $(TARGET): $(SOURCES)
+	mkdir -p $(@D)
 	$(CC) -o $(TARGET) $(SOURCES) $(CCFLAGS)
