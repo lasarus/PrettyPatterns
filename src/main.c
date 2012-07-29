@@ -1,4 +1,5 @@
 #include <SDL/SDL.h>
+#include "patterns.h"
 
 int screen_w = 640, screen_h = 480, screen_bpp = 32;
 int quit = 0;
@@ -24,6 +25,7 @@ int main(int argc, char ** argv)
   if(init())
     return 1;
 
+  int ticks = 0;
   while(!quit)
     {
       if(SDL_PollEvent(&event))
@@ -31,7 +33,14 @@ int main(int argc, char ** argv)
 	  if(event.type == SDL_QUIT)
 	    quit = 1;
 	}
+      /*Update/drawing Loop*/
 
+      draw_pattern(screen, 0, ticks);
+      
+      ticks++;
+      
+      /*End of update/drawing Loop*/
+      
       if(SDL_Flip(screen))
 	return 1;
     }
